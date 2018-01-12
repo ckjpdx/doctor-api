@@ -2,24 +2,28 @@ import { apiCall } from './../js/doctor.js';
 import { searchQueryPrepper } from './../js/searchQueryPrepper.js';
 function displayDocInfo(docInfo){
   $('#doc-list').empty();
+  if (docInfo.data.length === 0){
+    $('#doc-list').text('Nothing matched your search results!');
+  }
   docInfo.data.forEach(function(listing) {
+    const nameInfo = `<li>${listing.profile.first_name} ${listing.profile.last_name}</li>`;
     let contactInfo = ``;
-    let addressInfo = ``;
+    let acceptingPatientsMessage = '';
     if (listing.practices[0]) {
-      contactInfo = `<li>${listing.practices[0].visit_address}</li>
-      <li>${listing.practices[0].phones[0].number}</li>`;
-      addressInfo = `<li>
+      acceptingPatientsMessage = (listing.practices[0].accepts_new_patients) ? 'Accepting Patients' : 'NOT Accepting New Patients';
+      contactInfo = `<li>
       ${listing.practices[0].visit_address.street}, ${listing.practices[0].visit_address.street2}<br>
-      ${listing.practices[0].visit_address.city}
+      ${listing.practices[0].visit_address.city},
+      ${listing.practices[0].visit_address.state}
       ${listing.practices[0].visit_address.zip}
-      </li>`
+      </li>
+      <li>${listing.practices[0].phones[0].number}</li>`
     } else {
-      addressInfo = `No address on file`
       contactInfo = `No contact information on file`;
     }
     $('#doc-list').append(`<ul>
-      <li>${listing.profile.first_name} ${listing.profile.last_name}</li>
-      ${addressInfo}
+      ${nameInfo}
+      ${acceptingPatientsMessage}
       ${contactInfo}
       <ul>`);
   });
