@@ -8,11 +8,12 @@ function displayDocInfo(docInfo){
   docInfo.data.forEach(function(listing) {
     const nameInfo = `<li>${listing.profile.first_name} ${listing.profile.last_name}</li>`;
     let contactInfo = ``;
-    let acceptingPatientsMessage = '';
+    let acceptingPatientsMessage = ``;
     if (listing.practices[0]) {
       acceptingPatientsMessage = (listing.practices[0].accepts_new_patients) ? 'Accepting Patients' : 'NOT Accepting New Patients';
+      const street2 = listing.practices[0].visit_address.street2 || ``;
       contactInfo = `<li>
-      ${listing.practices[0].visit_address.street}, ${listing.practices[0].visit_address.street2}<br>
+      ${listing.practices[0].visit_address.street}, ${street2}<br>
       ${listing.practices[0].visit_address.city},
       ${listing.practices[0].visit_address.state}
       ${listing.practices[0].visit_address.zip}
@@ -21,11 +22,15 @@ function displayDocInfo(docInfo){
     } else {
       contactInfo = `No contact information on file`;
     }
-    $('#doc-list').append(`<ul>
-      ${nameInfo}
-      ${acceptingPatientsMessage}
-      ${contactInfo}
-      <ul>`);
+    $('#doc-list').append(`
+      <div class="doc-listing">
+        <img src="../img/${listing.profile.gender}.jpg">
+        <ul>
+          ${nameInfo}
+          ${acceptingPatientsMessage}
+          ${contactInfo}
+        <ul>
+      </div>`);
   });
 }
 $(document).ready(function(){

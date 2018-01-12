@@ -1,7 +1,29 @@
 * {
   box-sizing: border-box;
   text-align: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 h1 {
   font-size: 5em;
+}
+section#doc-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+div.doc-listing {
+  width: 100%;
+  margin: 20px;
+  background: #EEF;
+  border-radius: 10px;
+  img {
+    max-width: 200px;
+  }
+}
+@media screen and (min-width: 750px){
+  div.doc-listing {
+    width: 45%;
+  }
 }
