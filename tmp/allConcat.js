@@ -1,6 +1,6 @@
 import { apiCall } from './../js/doctor.js';
 import { searchQueryPrepper } from './../js/searchQueryPrepper.js';
-export function displayDocInfo(docInfo){
+function displayDocInfo(docInfo){
   $('h1').text(docInfo);
 }
 $(document).ready(function(){
