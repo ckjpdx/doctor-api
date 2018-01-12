@@ -3,5 +3,11 @@ export function displayDocInfo(docInfo){
   $('h1').text(docInfo);
 }
 $(document).ready(function(){
-  apiCall(displayDocInfo, `toothache`, `Johnson`, `or-portland`);
+  $('#user-form').submit(function(){
+    this.preventDefault();
+    let userAilment = $('#user-aliment').val();
+    let docName = $('#doc-name').val();
+    let searchLocation = $('#search-location').val();
+    apiCall(displayDocInfo, userAilment, docName, searchLocation);
+  });
 });
