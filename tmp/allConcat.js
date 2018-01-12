@@ -2,17 +2,27 @@ import { apiCall } from './../js/doctor.js';
 import { searchQueryPrepper } from './../js/searchQueryPrepper.js';
 function displayDocInfo(docInfo){
   $('#doc-list').empty();
-  for (let i = 0; i < docInfo.data.length; i++) {
-    let vAddress = docInfo.data[i].practices[0].visit_address;
-    if (vAddress === undefined) {
-      vAddress = `No Address Found`;
+  docInfo.data.forEach(function(listing) {
+    let contactInfo = ``;
+    let addressInfo = ``;
+    if (listing.practices[0]) {
+      contactInfo = `<li>${listing.practices[0].visit_address}</li>
+      <li>${listing.practices[0].phones[0].number}</li>`;
+      addressInfo = `<li>
+      ${listing.practices[0].visit_address.street}, ${listing.practices[0].visit_address.street2}<br>
+      ${listing.practices[0].visit_address.city}
+      ${listing.practices[0].visit_address.zip}
+      </li>`
+    } else {
+      addressInfo = `No address on file`
+      contactInfo = `No contact information on file`;
     }
     $('#doc-list').append(`<ul>
-      <li>${docInfo.data[i].profile.first_name} ${docInfo.data[i].profile.last_name}</li>
-      <li>${vAddress.street}, <em>${vAddress.street2}</em>, ${vAddress.city} ${vAddress.zip}</li>
-      <li>${docInfo.data[i].practices[0].phones[0].number}</li>
+      <li>${listing.profile.first_name} ${listing.profile.last_name}</li>
+      ${addressInfo}
+      ${contactInfo}
       <ul>`);
-  }
+  });
 }
 $(document).ready(function(){
   $('#user-form').submit(function(event){
