@@ -1,7 +1,7 @@
-import { testVar } from './../js/doctor.js';
-let apiKey = require('./../.env').apiKey;
-alert(testVar);
+import { apiCall } from './../js/doctor.js';
+export function displayDocInfo(docInfo){
+  $('h1').text(docInfo);
+}
 $(document).ready(function(){
-  alert(apiKey);
-  $('h1').text(apiKey);
+  apiCall(displayDocInfo, `toothache`, `Johnson`, `or-portland`);
 });
