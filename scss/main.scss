@@ -22,8 +22,31 @@ div.doc-listing {
     max-width: 200px;
   }
 }
+form {
+  margin: 10px;
+}
+input {
+  padding: 5px;
+  margin: auto;
+  width: 100%;
+}
+button {
+  margin: 20px 0;
+  padding: 5px;
+  font-size: 1em;
+  background: #EEF;
+  border-radius: 5px;
+  width: 100%;
+}
 @media screen and (min-width: 750px){
   div.doc-listing {
     width: 45%;
+  }
+  input {
+    display: inline;
+    width: inherit;
+  }
+  button {
+    width: 50%;
   }
 }

@@ -8,7 +8,7 @@ function displayDocInfo(docInfo){
   docInfo.data.forEach(function(listing) {
     const nameInfo = `<li>${listing.profile.first_name} ${listing.profile.last_name}</li>`;
     let contactInfo = ``;
-    let acceptingPatientsMessage = ``;
+    let acceptingPatientsMessage = ``; // use let here? or var, so it can be into if statement?
     if (listing.practices[0]) {
       acceptingPatientsMessage = (listing.practices[0].accepts_new_patients) ? 'Accepting Patients' : 'NOT Accepting New Patients';
       const street2 = listing.practices[0].visit_address.street2 || ``;
